@@ -25,7 +25,7 @@ This system combines retrieval-augmented generation (RAG) with semantic embeddin
 
 ---
 
-🚀 Features
+## 🚀 Features
 🌐 Web Scraping - Extract clean text from articles using BeautifulSoup.
 
 📄 PDF Parsing - Read text from PDFs with PyMuPDF (fitz).
