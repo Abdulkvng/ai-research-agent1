@@ -21,6 +21,22 @@ This system combines retrieval-augmented generation (RAG) with semantic embeddin
 - Embeds text using OpenAIEmbeddings (tiktoken-aware)
 - Stores semantic vectors using ChromaDB
 - Supports context-aware question answering via similarity search + LLM completion
+  
+
+---
+
+🚀 Features
+🌐 Web Scraping - Extract clean text from articles using BeautifulSoup.
+
+📄 PDF Parsing - Read text from PDFs with PyMuPDF (fitz).
+
+🧠 AI Summarization - Generate concise summaries using OpenAI GPT-4.
+
+❓ Q&A System - Ask questions and get precise answers with semantic search (vector DB + GPT-4).
+
+📊 Vector Database - Store and retrieve text chunks efficiently using ChromaDB and OpenAI Embeddings.
+
+📝 Report Generation - Export summaries and Q&A sessions to Word documents.
 
 ---
 
@@ -72,66 +88,45 @@ This system combines retrieval-augmented generation (RAG) with semantic embeddin
 | Vector DB | ChromaDB (`langchain_community.vectorstores.Chroma`) |
 | Embeddings | `OpenAIEmbeddings` via `langchain-openai` |
 | PDF Parsing | `PyMuPDF (fitz)` |
-| HTML Parsing | `requests` + BeautifulSoup (if implemented) |
+| HTML Parsing | `requests` + BeautifulSoup |
 | Tokenizer | `tiktoken` |
 | Env Vars | `python-dotenv` |
 | Agent Framework | LangChain |
 
 ---
 
-## 📁 Project Structure
 
-ai-research-agent/
-├── main.py # CLI entry point
-├── .env.example # Sample environment file
-├── requirements.txt # Dependency list
-├── README.md # Project documentation
-│
-├── retriever/
-│ └── pdf_loader.py # Handles both URL and local PDF parsing
-│
-├── llm_agent/
-│ ├── summarizer.py # Summarizes input text using OpenAI
-│ └── qa_agent.py # Performs semantic Q&A with GPT-4
-│
-├── memory/
-│ └── vector_store.py # Vector DB management using Chroma
-│
-├── outputs/ # Optional: logs or saved summaries
-└── venv/ # Local virtual environment (excluded from Git)
 
 
 ---
+## ⚙️ How it works
 
-## 🔐 Environment Setup
+📂 1. Data Ingestion
+The system supports two input types:
 
-### 1. Clone & Setup
+Web URLs → Extracts text using requests + BeautifulSoup.
 
-git clone https://github.com/YOUR_USERNAME/ai-research-agent.git
-cd ai-research-agent
-python3 -m venv venv
-source venv/bin/activate
+Local PDFs → Parses text with PyMuPDF.
 
-2. Install Dependencies
-pip install -r requirements.txt
-3. Set Environment Variables
-cp .env.example .env
+✂️ 2. Text Processing
+Chunks large documents into smaller segments (RecursiveCharacterTextSplitter).
 
+Converts text into vector embeddings (OpenAIEmbeddings) for semantic search.
 
----
-## How it works
+🧠 3. AI-Powered Analysis
+Summarization → GPT-4 condenses long texts into key points.
 
+Question Answering → Relevant chunks retrieved via ChromaDB vector search, then fed to GPT-4 for answers.
 
-🔍 AI Research Assistant
+💾 4. Knowledge Retention
+Stores text embeddings in a ChromaDB vector store for fast retrieval.
 
-Choose input type (web/pdf): pdf
-Enter PDF path or URL: https://arxiv.org/pdf/2402.01234.pdf
+📤 5. Output Generation
+Generates a structured Word document (output.docx) containing:
 
-📖 Summarizing content...
-✅ Summary: [short GPT-4 summary]
+Summary of the input text.
 
-Ask a question (or type 'exit'): What is the main contribution?
-🤖 Answer: The authors propose a novel approach to...
+Q&A log of all user questions and AI responses.
 
 ---
 
@@ -159,16 +154,4 @@ MIT License. Use, modify, or extend freely with attribution.
 🙋‍♂️ Support
 If you have questions or issues, open an Issue or reach out.
 
-yaml
-Copy
-Edit
 
----
-
-## ✅ Next Step
-
-- Replace `YOUR_USERNAME` with your GitHub username
-- Save this as `README.md` in your project root
-- You're ready to `git add . && git commit -m "Initial commit"` and push!
-
-Would you like the `.gitignore` or pre-filled `pdf_loader.py` as well?
