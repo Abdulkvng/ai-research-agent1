@@ -107,18 +107,20 @@ ai-research-agent/
 
 ### 1. Clone & Setup
 
-```bash
 git clone https://github.com/YOUR_USERNAME/ai-research-agent.git
 cd ai-research-agent
 python3 -m venv venv
 source venv/bin/activate
 
 2. Install Dependencies
-```bash
 pip install -r requirements.txt
 3. Set Environment Variables
-bash
 cp .env.example .env
+
+
+---
+## How it works
+
 
 🔍 AI Research Assistant
 
@@ -131,7 +133,7 @@ Enter PDF path or URL: https://arxiv.org/pdf/2402.01234.pdf
 Ask a question (or type 'exit'): What is the main contribution?
 🤖 Answer: The authors propose a novel approach to...
 
-
+---
 
 📌 Notes
 GPT-4 may introduce latency. You can switch to gpt-3.5-turbo for faster responses.
