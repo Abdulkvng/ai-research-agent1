@@ -1,7 +1,10 @@
 
 # ai - research - agent
+import openai
+import os
 
-import os  # Used to check if file paths exist
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 # Import your helper modules
 from retriever.web_scraper import scrape_article          # Scrapes web articles
@@ -10,6 +13,8 @@ from llm_agent.summarizer import summarize                # Summarizes text usin
 from llm_agent.qa_agent import ask_question               # Q&A using retrieved context and LLM
 from memory.vector_store import create_vector_store, get_relevant_chunks  # Vector DB setup and search
 from outputs.report_generator import generate_doc         # Creates a Word document output
+from retriever.pdf_loader import extract_text_from_pdf_url, extract_text_from_pdf_path
+
 
 def main():
     print("\n🔍 AI Research Assistant\n")
@@ -37,6 +42,10 @@ def main():
     print("\n✅ Summary:\n", summary)
 
     # Step 2: Create a vector store so we can do similarity search on document chunks
+    
+    if not text.strip():
+        print("❌ No text was extracted from the input. Skipping vector storage.")
+        return
     print("\n💾 Creating memory store...")
     vector_store = create_vector_store(text)
 
